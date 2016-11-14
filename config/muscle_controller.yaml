@@ -1,0 +1,3 @@
+muscle_controller:
+  type: muscle_controllers/MuscleController
+  publish_rate: 50

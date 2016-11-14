@@ -1,0 +1,16 @@
+<library path="lib/libmuscle_controller">
+
+  <class name="muscle_controllers/MuscleController" type="muscle_controllers::MuscleController" base_class_type="controller_interface::ControllerBase">
+    <description>
+      The MuscleController tracks muscle commands.
+    </description>
+  </class>
+
+  <!--
+  <class name="muscle_controllers/MuscleGroupController" type="muscle_controllers::MuscleController" base_class_type="controller_interface::ControllerBase">
+    <description>
+      The MuscleGroupController tracks muscle commands for a set of muscles.
+    </description>
+  </class>-->
+
+</library>
