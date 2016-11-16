@@ -22,6 +22,10 @@ namespace muscle_controllers {
   void MuscleController::update(const ros::Time &time, const ros::Duration &period) {
     ROS_INFO("Muscle Controller Update");
 
+    /* //EXAMPLE
+    double val = robot_->getHandle(robot_->getNames()[0]).getDesiredPressure();
+    robot_->getHandle(robot_->getNames()[0]).setDesiredPressure(val+0.01);
+     */
   }
 
   void MuscleController::setCommandCB(const std_msgs::Float64ConstPtr &msg) {
