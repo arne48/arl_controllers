@@ -10,13 +10,9 @@ namespace muscle_controllers {
     sub_command_.shutdown();
   }
 
-  bool MuscleController::init(arl_interfaces::MuscleInterface *robot, ros::NodeHandle &n) {
+  bool MuscleController::init(arl_interfaces::MuscleInterface *robot, ros::NodeHandle &nh) {
     robot_ = robot;
     return true;
-  }
-
-  void MuscleController::starting(const ros::Time &time) {
-
   }
 
   void MuscleController::update(const ros::Time &time, const ros::Duration &period) {
