@@ -8,9 +8,11 @@ find_package(catkin REQUIRED COMPONENTS
   controller_interface
   roscpp
   arl_interfaces
+  arl_hw_msgs
   hardware_interface
   cmake_modules
   pluginlib
+  control_toolbox
 )
 
 catkin_package(

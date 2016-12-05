@@ -5,5 +5,5 @@
   <rosparam command="load" file="$(find arl_controllers)/config/muscle_controller.yaml" />
 
   <!-- spawn controller -->
-  <node name="muscle_controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="muscle_controller" />
+  <node name="muscle_controller_spawner"  pkg="controller_manager" type="spawner" output="screen" args="r_ulna_controller r_humerus_controller" />
 </launch>
