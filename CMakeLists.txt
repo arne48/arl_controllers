@@ -16,13 +16,10 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-  INCLUDE_DIRS
-        include
-#  LIBRARIES arl_controllers
-#  CATKIN_DEPENDS controller_interface roscpp
-  DEPENDS
-        pluginlib
-        roscpp
+  INCLUDE_DIRS include
+  LIBRARIES muscle_controller
+  CATKIN_DEPENDS controller_interface roscpp
+  DEPENDS pluginlib roscpp
 )
 
 include_directories(
@@ -31,6 +28,7 @@ include_directories(
 )
 
 add_library(muscle_controller src/muscle_controller.cpp)
+add_dependencies(muscle_controller arl_hw_msgs_gencpp) 
 
 target_link_libraries(muscle_controller ${catkin_LIBRARIES})
 
