@@ -1,11 +1,9 @@
 r_ulna_controller:
   type: muscle_controllers/MuscleController
-  publish_rate: 50
   name: ulna
   pid: {p: 700,  i: 0.01, d: 100}
 
 r_humerus_controller:
   type: muscle_controllers/MuscleController
-  publish_rate: 50
   name: humerus
   pid: {p: 700,  i: 0.01, d: 100}
