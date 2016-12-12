@@ -64,9 +64,8 @@ namespace muscle_controllers {
     }
     loop_count_++;
 
-    muscle_.setCurrentPressure(muscle_.getCurrentPressure()+0.1);
 
-    muscle_.setDesiredPressure(command_struct_.desired_pressure_);
+    muscle_.setActivation(command_struct_.desired_pressure_);
 
   }
 
