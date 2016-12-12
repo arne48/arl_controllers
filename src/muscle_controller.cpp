@@ -66,6 +66,8 @@ namespace muscle_controllers {
 
     muscle_.setCurrentPressure(muscle_.getCurrentPressure()+0.1);
 
+    muscle_.setDesiredPressure(command_struct_.desired_pressure_);
+
   }
 
   void MuscleController::setCommandCB(const std_msgs::Float64ConstPtr &msg) {
