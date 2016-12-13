@@ -41,7 +41,7 @@ namespace muscle_controllers {
   }
 
   void MuscleController::update(const ros::Time &time, const ros::Duration &period) {
-    ROS_INFO("Muscle Controller Update");
+    ROS_DEBUG("Muscle Controller Update");
     command_struct_ = *(command_.readFromRT());
 
     // publish state
