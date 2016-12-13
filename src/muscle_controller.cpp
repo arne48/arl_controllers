@@ -15,7 +15,7 @@ namespace muscle_controllers {
     std::string muscle_name;
     if (!nh.getParam("name", muscle_name))
     {
-      ROS_ERROR("No muscle name given (namespace: %s)", nh.getNamespace().c_str());
+      ROS_DEBUG("No muscle name given (namespace: %s)", nh.getNamespace().c_str());
       return false;
     }
 
