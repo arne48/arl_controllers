@@ -30,6 +30,8 @@
   <run_depend>control_toolbox</run_depend>
 
 
+  <test_depend>rostest</test_depend>
+
   <export>
     <controller_interface plugin="${prefix}/muscle_controllers_plugins.xml"/>
   </export>

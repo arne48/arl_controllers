@@ -25,6 +25,7 @@ namespace muscle_controllers {
      * Command structure for realtime safe buffer
      */
     struct Commands {
+      double activation_; /**<  Normalized activation of muscle */
       double desired_pressure_; /**<  Desired pressure of muscle */
     };
 

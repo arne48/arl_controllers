@@ -11,15 +11,13 @@ namespace muscle_controllers {
   }
 
   bool MuscleController::init(arl_interfaces::MuscleInterface *robot, ros::NodeHandle &nh) {
-
     std::string muscle_name;
-    if (!nh.getParam("name", muscle_name))
-    {
-      ROS_DEBUG("No muscle name given (namespace: %s)", nh.getNamespace().c_str());
+    if (!nh.getParam("name", muscle_name)) {
+      ROS_ERROR("No muscle name given (namespace: %s)", nh.getNamespace().c_str());
       return false;
     }
 
-    if (!pid_controller_.init(ros::NodeHandle(nh, "pid"))){
+    if (!pid_controller_.init(ros::NodeHandle(nh, "pid"))) {
       return false;
     }
 
@@ -33,11 +31,9 @@ namespace muscle_controllers {
   }
 
   void MuscleController::starting(const ros::Time &time) {
-
     command_struct_.desired_pressure_ = muscle_.getDesiredPressure();
-
+    command_struct_.activation_ = muscle_.getActivation();
     command_.initRT(command_struct_);
-
   }
 
   void MuscleController::update(const ros::Time &time, const ros::Duration &period) {
@@ -45,28 +41,24 @@ namespace muscle_controllers {
     command_struct_ = *(command_.readFromRT());
 
     // publish state
-    if (loop_count_ % 10 == 0)
-    {
-      if(controller_state_publisher_ && controller_state_publisher_->trylock())
-      {
+    if (loop_count_ % 10 == 0) {
+      if (controller_state_publisher_ && controller_state_publisher_->trylock()) {
+        controller_state_publisher_->msg_.name = muscle_.getName();
         controller_state_publisher_->msg_.current_pressure = muscle_.getCurrentPressure();
         controller_state_publisher_->msg_.desired_pressure = command_struct_.desired_pressure_;
         controller_state_publisher_->msg_.tension = muscle_.getTension();
-
+        controller_state_publisher_->msg_.activation = command_struct_.activation_;
 
         controller_state_publisher_->unlockAndPublish();
       }
     }
     loop_count_++;
 
-
-    muscle_.setActivation(command_struct_.desired_pressure_);
-
+    muscle_.setActivation(command_struct_.activation_);
   }
 
   void MuscleController::setCommandCB(const std_msgs::Float64ConstPtr &msg) {
-    command_struct_.desired_pressure_ = msg->data;
-
+    command_struct_.activation_ = msg->data;
     command_.writeFromNonRT(command_struct_);
   }
 

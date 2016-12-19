@@ -1,0 +1,4 @@
+good_muscle_controller:
+  type: muscle_controllers/MuscleController
+  name: muscle_0
+  pid: {p: 700,  i: 0.01, d: 100}

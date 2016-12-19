@@ -1,0 +1,5 @@
+<launch>
+  <rosparam command="load" file="$(find arl_controllers)/test/muscle_controller_good.yaml" />
+  <rosparam command="load" file="$(find arl_controllers)/test/muscle_controller_bad.yaml" />
+  <test test-name="muscle_controller_test" pkg="arl_controllers" type="muscle_controller_test"/>
+</launch>

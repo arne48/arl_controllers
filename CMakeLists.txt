@@ -32,6 +32,15 @@ add_dependencies(muscle_controller arl_hw_msgs_gencpp)
 
 target_link_libraries(muscle_controller ${catkin_LIBRARIES})
 
+if(CATKIN_ENABLE_TESTING)
+    find_package(rostest REQUIRED)
+
+    add_rostest_gtest(muscle_controller_test
+            test/muscle_controller.test
+            test/muscle_controller_test.cpp)
+    target_link_libraries(muscle_controller_test muscle_controller ${catkin_LIBRARIES})
+endif()
+
 install(DIRECTORY include/${PROJECT_NAME}/
         DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 

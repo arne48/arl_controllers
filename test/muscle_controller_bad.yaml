@@ -1,0 +1,2 @@
+bad_muscle_controller:
+  type: muscle_controllers/MuscleController
