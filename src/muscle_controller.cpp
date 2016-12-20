@@ -19,6 +19,7 @@ namespace muscle_controllers {
     }
 
     if (!pid_controller_.init(ros::NodeHandle(nh, "pid"))) {
+      ROS_ERROR("No pid parameters found (namespace: %s)", nh.getNamespace().c_str());
       return false;
     }
 
@@ -70,6 +71,8 @@ namespace muscle_controllers {
         }
         control_mode_ = arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE;
         break;
+      default:
+        ROS_WARN("Unknown control mode used");
     }
 
     muscle_.setActivation(command_struct_.activation_);
