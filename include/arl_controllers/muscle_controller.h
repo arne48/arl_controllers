@@ -27,6 +27,7 @@ namespace muscle_controllers {
     struct Commands {
       double activation_; /**<  Normalized activation of muscle */
       double desired_pressure_; /**<  Desired pressure of muscle */
+      uint8_t mode_; /**<  Current mode of muscle control */
     };
 
     /**
@@ -65,16 +66,25 @@ namespace muscle_controllers {
     arl_interfaces::MuscleInterface *robot_;  /**< Handle to robot's muscle interface */
 
   private:
+    uint8_t control_mode_;
     int loop_count_;
     control_toolbox::Pid pid_controller_;
     boost::scoped_ptr<realtime_tools::RealtimePublisher<arl_hw_msgs::Muscle> > controller_state_publisher_;
-    ros::Subscriber sub_command_;  /**< Subscription to MuscleCommands */
+    ros::Subscriber sub_act_command_;  /**< Subscription to MuscleCommands by activation */
+    ros::Subscriber sub_press_command_;  /**< Subscription to MuscleCommands by pressure */
+
 
     /**
-     * Callback for MuscleCommands issued to controlled muscles
+     * Callback for MuscleCommands issued to controlled muscles by activation
      * @param msg MuscleCommand for interaction with muscles
      */
-    void setCommandCB(const std_msgs::Float64ConstPtr &msg);
+    void setActCommandCB(const std_msgs::Float64ConstPtr &msg);
+
+    /**
+     * Callback for MuscleCommands issued to controlled muscles by pressure
+     * @param msg MuscleCommand for interaction with muscles
+     */
+    void setPressCommandCB(const std_msgs::Float64ConstPtr &msg);
   };
 
 }

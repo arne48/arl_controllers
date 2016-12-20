@@ -7,6 +7,7 @@
 3. Usage
 	1. Config Files
 	2. Launch Files
+	3. Topics
 4. Build Status
 
 ## Introduction
@@ -32,7 +33,7 @@ The **MuscleController** implements the usage of PAMs based on sensed informatio
 *MuscleInterface* from [arl_interfaces](https://github.com/arne48/arl_interfaces)
 
 #### Further information about controlling strategies
-TBA
+In pressure control mode the *pid* package is used.
 
 ## Usage
 ### Config-Files
@@ -42,6 +43,11 @@ Contains the details of the **MuscleController** for the Parameter Server so it 
 ### Launch-Files
 * muscle_controller.launch
 Loads the details of the **MuscleController** found in the *muscle_controller.yaml* and calls the spawner of the controller manager afterwards.
+
+### Topics
+* \[muscle_name\]/state = MuscleState
+* \[muscle_name\]/activation_command = Float64
+* \[muscle_name\]/pressure_command = Float64
 
 ## Build Status
 Once tests are added to the project a status indicator will be placed here.

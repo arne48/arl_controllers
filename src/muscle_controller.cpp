@@ -4,10 +4,11 @@
 namespace muscle_controllers {
 
   MuscleController::MuscleController()
-    : loop_count_(0) {}
+    : loop_count_(0), control_mode_(arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION) {}
 
   MuscleController::~MuscleController() {
-    sub_command_.shutdown();
+    sub_act_command_.shutdown();
+    sub_press_command_.shutdown();
   }
 
   bool MuscleController::init(arl_interfaces::MuscleInterface *robot, ros::NodeHandle &nh) {
@@ -25,7 +26,8 @@ namespace muscle_controllers {
     muscle_ = robot_->getHandle(muscle_name);
 
     controller_state_publisher_.reset(new realtime_tools::RealtimePublisher<arl_hw_msgs::Muscle>(nh, "state", 1));
-    sub_command_ = nh.subscribe<std_msgs::Float64>("command", 1, &MuscleController::setCommandCB, this);
+    sub_act_command_ = nh.subscribe<std_msgs::Float64>("activation_command", 1, &MuscleController::setActCommandCB, this);
+    sub_press_command_ = nh.subscribe<std_msgs::Float64>("pressure_command", 1, &MuscleController::setPressCommandCB, this);
 
     return true;
   }
@@ -37,7 +39,7 @@ namespace muscle_controllers {
   }
 
   void MuscleController::update(const ros::Time &time, const ros::Duration &period) {
-    ROS_DEBUG("Muscle Controller Update");
+    //ROS_DEBUG("Muscle Controller Update");
     command_struct_ = *(command_.readFromRT());
 
     // publish state
@@ -48,17 +50,44 @@ namespace muscle_controllers {
         controller_state_publisher_->msg_.desired_pressure = command_struct_.desired_pressure_;
         controller_state_publisher_->msg_.tension = muscle_.getTension();
         controller_state_publisher_->msg_.activation = command_struct_.activation_;
+        controller_state_publisher_->msg_.control_mode = command_struct_.mode_;
 
         controller_state_publisher_->unlockAndPublish();
       }
     }
     loop_count_++;
 
+    switch (command_struct_.mode_) {
+      case arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION:
+        if (command_struct_.mode_ != control_mode_) {
+          ROS_DEBUG("Switched from pressure to activation control");
+        }
+        control_mode_ = arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION;;
+        break;
+      case arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE:
+        if (command_struct_.mode_ != control_mode_) {
+          ROS_DEBUG("Switched from activation to pressure control");
+        }
+        control_mode_ = arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE;
+        break;
+    }
+
     muscle_.setActivation(command_struct_.activation_);
   }
 
-  void MuscleController::setCommandCB(const std_msgs::Float64ConstPtr &msg) {
+  void MuscleController::setActCommandCB(const std_msgs::Float64ConstPtr &msg) {
     command_struct_.activation_ = msg->data;
+    //Maybe not needed to reset value to 0.0
+    command_struct_.desired_pressure_ = 0.0;
+    command_struct_.mode_ = arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION;
+    command_.writeFromNonRT(command_struct_);
+  }
+
+  void MuscleController::setPressCommandCB(const std_msgs::Float64ConstPtr &msg) {
+    command_struct_.desired_pressure_ = msg->data;
+    //Maybe not needed to reset value to 0.0
+    command_struct_.activation_ = 0.0;
+    command_struct_.mode_ = arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE;
     command_.writeFromNonRT(command_struct_);
   }
 
