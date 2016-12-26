@@ -58,24 +58,15 @@ namespace muscle_controllers {
     }
     loop_count_++;
 
-    switch (command_struct_.mode_) {
-      case arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION:
-        if (command_struct_.mode_ != control_mode_) {
-          ROS_DEBUG("Switched from pressure to activation control");
-        }
-        control_mode_ = arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION;;
-        break;
-      case arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE:
-        if (command_struct_.mode_ != control_mode_) {
-          ROS_DEBUG("Switched from activation to pressure control");
-        }
-        control_mode_ = arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE;
-        break;
-      default:
-        ROS_WARN("Unknown control mode used");
+    control_mode_ = command_struct_.mode_;
+
+    if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION){
+      muscle_.setActivation(command_struct_.activation_);
+      muscle_.setDesiredPressure(command_struct_.desired_pressure_);
+    } else if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE){
+      //PID
     }
 
-    muscle_.setActivation(command_struct_.activation_);
   }
 
   void MuscleController::setActCommandCB(const std_msgs::Float64ConstPtr &msg) {
