@@ -1,39 +1,39 @@
 r_ulna_controller0:
   type: muscle_controllers/MuscleController
   name: ulna0
-  pid: {p: 700,  i: 0.01, d: 100}
+  pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
 r_humerus_controller0:
   type: muscle_controllers/MuscleController
   name: humerus0
-  pid: {p: 700,  i: 0.01, d: 100}
+  pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
 r_ulna_controller1:
   type: muscle_controllers/MuscleController
   name: ulna1
-  pid: {p: 700,  i: 0.01, d: 100}
+  pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
 r_humerus_controller1:
   type: muscle_controllers/MuscleController
   name: humerus1
-  pid: {p: 700,  i: 0.01, d: 100}
+  pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
 r_ulna_controller2:
   type: muscle_controllers/MuscleController
   name: ulna2
-  pid: {p: 700,  i: 0.01, d: 100}
+  pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
 r_humerus_controller2:
   type: muscle_controllers/MuscleController
   name: humerus2
-  pid: {p: 700,  i: 0.01, d: 100}
+  pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
 r_ulna_controller3:
   type: muscle_controllers/MuscleController
   name: ulna3
-  pid: {p: 700,  i: 0.01, d: 100}
+  pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
 r_humerus_controller3:
   type: muscle_controllers/MuscleController
   name: humerus3
-  pid: {p: 700,  i: 0.01, d: 100}
+  pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}

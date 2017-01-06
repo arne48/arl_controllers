@@ -37,11 +37,26 @@ namespace muscle_controllers {
     command_struct_.desired_pressure_ = muscle_.getDesiredPressure();
     command_struct_.activation_ = muscle_.getActivation();
     command_.initRT(command_struct_);
+    pid_controller_.reset();
   }
 
   void MuscleController::update(const ros::Time &time, const ros::Duration &period) {
     //ROS_DEBUG("Muscle Controller Update");
     command_struct_ = *(command_.readFromRT());
+
+    control_mode_ = command_struct_.mode_;
+
+    //If muscle is controlled by activation just this value is set no need to use the pid controller
+    if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION){
+      muscle_.setActivation(command_struct_.activation_);
+      muscle_.setDesiredPressure(command_struct_.desired_pressure_);
+    } else if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE) {
+      double error = muscle_.getDesiredPressure() - muscle_.getCurrentPressure();
+      command_struct_.activation_ = pid_controller_.computeCommand(error, period);
+      muscle_.setActivation(command_struct_.activation_);
+      muscle_.setDesiredPressure(command_struct_.desired_pressure_);
+    }
+
 
     // publish state
     if (loop_count_ % 10 == 0) {
@@ -58,15 +73,6 @@ namespace muscle_controllers {
     }
     loop_count_++;
 
-    control_mode_ = command_struct_.mode_;
-
-    if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION){
-      muscle_.setActivation(command_struct_.activation_);
-      muscle_.setDesiredPressure(command_struct_.desired_pressure_);
-    } else if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE){
-      //PID
-    }
-
   }
 
   void MuscleController::setActCommandCB(const std_msgs::Float64ConstPtr &msg) {
@@ -80,7 +86,6 @@ namespace muscle_controllers {
   void MuscleController::setPressCommandCB(const std_msgs::Float64ConstPtr &msg) {
     command_struct_.desired_pressure_ = msg->data;
     //Maybe not needed to reset value to 0.0
-    command_struct_.activation_ = 0.0;
     command_struct_.mode_ = arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE;
     command_.writeFromNonRT(command_struct_);
   }
