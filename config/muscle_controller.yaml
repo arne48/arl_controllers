@@ -1,39 +1,39 @@
-r_ulna_controller0:
+r_pectoralis_major_controller:
   type: muscle_controllers/MuscleController
-  name: ulna0
+  name: r_pectoralis_major
   pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
-r_humerus_controller0:
+r_deltoid_controller:
   type: muscle_controllers/MuscleController
-  name: humerus0
+  name: r_deltoid
   pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
-r_ulna_controller1:
+r_triceps_brachii_controller:
   type: muscle_controllers/MuscleController
-  name: ulna1
+  name: r_triceps_brachii
   pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
-r_humerus_controller1:
+r_biceps_brachii_controller:
   type: muscle_controllers/MuscleController
-  name: humerus1
+  name: r_biceps_brachii
   pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
-r_ulna_controller2:
+r_brachialis_controller:
   type: muscle_controllers/MuscleController
-  name: ulna2
+  name: r_brachialis
   pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
-r_humerus_controller2:
+r_brachioradialis_controller:
   type: muscle_controllers/MuscleController
-  name: humerus2
+  name: r_brachioradialis
   pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
-r_ulna_controller3:
+r_flexor_carpi_ulnaris_controller:
   type: muscle_controllers/MuscleController
-  name: ulna3
+  name: r_flexor_carpi_ulnaris
   pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
 
-r_humerus_controller3:
+r_extensor_digitorum_controller:
   type: muscle_controllers/MuscleController
-  name: humerus3
+  name: r_extensor_digitorum
   pid: {p: 1.0,  i: 1.0, d: 1.0, i_clamp_min: -1.0, i_clamp_max: 1.0}
