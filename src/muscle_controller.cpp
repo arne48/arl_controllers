@@ -36,6 +36,7 @@ namespace muscle_controllers {
   void MuscleController::starting(const ros::Time &time) {
     command_struct_.desired_pressure_ = muscle_.getDesiredPressure();
     command_struct_.activation_ = muscle_.getActivation();
+    command_struct_.mode_ = arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION;
     command_.initRT(command_struct_);
     pid_controller_.reset();
   }
