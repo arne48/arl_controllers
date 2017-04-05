@@ -52,8 +52,13 @@ namespace muscle_controllers {
       muscle_.setActivation(command_struct_.activation_);
       muscle_.setDesiredPressure(command_struct_.desired_pressure_);
     } else if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE) {
+      //double error = muscle_.getDesiredPressure() - muscle_.getCurrentPressure();
+      //command_struct_.activation_ = pid_controller_.computeCommand(error, period);
+
+      double range = 1 / 3000;
       double error = muscle_.getDesiredPressure() - muscle_.getCurrentPressure();
-      command_struct_.activation_ = pid_controller_.computeCommand(error, period);
+      command_struct_.activation_ = (range * error) * 1;
+
       muscle_.setActivation(command_struct_.activation_);
       muscle_.setDesiredPressure(command_struct_.desired_pressure_);
     }
@@ -68,6 +73,15 @@ namespace muscle_controllers {
         controller_state_publisher_->msg_.tension = muscle_.getTension();
         controller_state_publisher_->msg_.activation = command_struct_.activation_;
         controller_state_publisher_->msg_.control_mode = command_struct_.mode_;
+
+        //mean filter for volatile tension values
+        tension_buffer_[(loop_count_ / 10) % SAMPLE_SIZE] = muscle_.getTension();
+        double mean = 0;
+        for(unsigned int idx = 0; idx < SAMPLE_SIZE; idx++) {
+          mean += tension_buffer_[idx];
+        }
+        mean /= SAMPLE_SIZE;
+        controller_state_publisher_->msg_.tension_filtered = mean;
 
         controller_state_publisher_->unlockAndPublish();
       }
