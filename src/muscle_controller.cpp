@@ -46,21 +46,28 @@ namespace muscle_controllers {
     command_struct_ = *(command_.readFromRT());
 
     control_mode_ = command_struct_.mode_;
+    double activation = command_struct_.activation_;
+    double desired_pressure = command_struct_.desired_pressure_;
 
     //If muscle is controlled by activation just this value is set no need to use the pid controller
     if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION){
-      muscle_.setActivation(command_struct_.activation_);
-      muscle_.setDesiredPressure(command_struct_.desired_pressure_);
+      muscle_.setActivation(activation);
+      muscle_.setDesiredPressure(desired_pressure);
     } else if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE) {
+	  //FIXME 
       //double error = muscle_.getDesiredPressure() - muscle_.getCurrentPressure();
       //command_struct_.activation_ = pid_controller_.computeCommand(error, period);
 
-      double range = 1 / 3000;
+      muscle_.setDesiredPressure(desired_pressure);      
       double error = muscle_.getDesiredPressure() - muscle_.getCurrentPressure();
-      command_struct_.activation_ = (range * error) * 1;
 
-      muscle_.setActivation(command_struct_.activation_);
-      muscle_.setDesiredPressure(command_struct_.desired_pressure_);
+      if(error > 100) {
+        activation = 0.01;
+	  } else if (error < 100) {
+		activation = -0.01;
+	  } 
+
+      muscle_.setActivation(activation);
     }
 
 
@@ -69,10 +76,10 @@ namespace muscle_controllers {
       if (controller_state_publisher_ && controller_state_publisher_->trylock()) {
         controller_state_publisher_->msg_.name = muscle_.getName();
         controller_state_publisher_->msg_.current_pressure = muscle_.getCurrentPressure();
-        controller_state_publisher_->msg_.desired_pressure = command_struct_.desired_pressure_;
+        controller_state_publisher_->msg_.desired_pressure = muscle_.getDesiredPressure();
         controller_state_publisher_->msg_.tension = muscle_.getTension();
-        controller_state_publisher_->msg_.activation = command_struct_.activation_;
-        controller_state_publisher_->msg_.control_mode = command_struct_.mode_;
+        controller_state_publisher_->msg_.activation = muscle_.getActivation();
+        controller_state_publisher_->msg_.control_mode = control_mode_;
 
         //mean filter for volatile tension values
         tension_buffer_[(loop_count_ / 10) % SAMPLE_SIZE] = muscle_.getTension();
