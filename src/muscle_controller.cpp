@@ -53,19 +53,17 @@ namespace muscle_controllers {
     if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION){
       muscle_.setActivation(activation);
       muscle_.setDesiredPressure(desired_pressure);
-    } else if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE) {
-	  //FIXME 
-      //double error = muscle_.getDesiredPressure() - muscle_.getCurrentPressure();
-      //command_struct_.activation_ = pid_controller_.computeCommand(error, period);
 
+    } else if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE) {
       muscle_.setDesiredPressure(desired_pressure);      
       double error = muscle_.getDesiredPressure() - muscle_.getCurrentPressure();
+      double value = pid_controller_.computeCommand(error, period);
 
-      if(error > 100) {
-        activation = 0.01;
-	  } else if (error < 100) {
-		activation = -0.01;
-	  } 
+      if (error > 100) {
+        activation = 0.1;
+      } else if (error < 100) {
+        activation = -0.1;
+      }
 
       muscle_.setActivation(activation);
     }
