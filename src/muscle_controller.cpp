@@ -57,15 +57,10 @@ namespace muscle_controllers {
     } else if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE) {
       muscle_.setDesiredPressure(desired_pressure);      
       double error = muscle_.getDesiredPressure() - muscle_.getCurrentPressure();
-      double value = pid_controller_.computeCommand(error, period);
-
-      if (error > 100) {
-        activation = 0.1;
-      } else if (error < 100) {
-        activation = -0.1;
-      }
-
-      muscle_.setActivation(activation);
+      double pid_value = pid_controller_.computeCommand(error, period);
+      // ~ 100 x value range
+      pid_value /= 800000;
+      muscle_.setActivation(pid_value);
     }
 
 
