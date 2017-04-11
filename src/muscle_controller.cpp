@@ -4,7 +4,13 @@
 namespace muscle_controllers {
 
   MuscleController::MuscleController()
-    : loop_count_(0), control_mode_(arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION) {}
+    : loop_count_(0), control_mode_(arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION) {
+    kal_x_ = 40000;
+    kal_P_ = 100;
+    kal_R_ = 100;
+    kal_Q_ = 0.2;
+    kal_u_ = 0.0;
+  }
 
   MuscleController::~MuscleController() {
     sub_act_command_.shutdown();
@@ -74,14 +80,13 @@ namespace muscle_controllers {
         controller_state_publisher_->msg_.activation = muscle_.getActivation();
         controller_state_publisher_->msg_.control_mode = control_mode_;
 
-        //mean filter for volatile tension values
-        tension_buffer_[(loop_count_ / 10) % SAMPLE_SIZE] = muscle_.getTension();
-        double mean = 0;
-        for(unsigned int idx = 0; idx < SAMPLE_SIZE; idx++) {
-          mean += tension_buffer_[idx];
-        }
-        mean /= SAMPLE_SIZE;
-        controller_state_publisher_->msg_.tension_filtered = mean;
+        //kalman filter for volatile tension values
+        kal_x_ = (muscle_.getTension() * kal_P_ + kal_x_ * kal_R_) / (kal_P_ + kal_R_);
+        kal_P_ = 1.0 / (1.0 / kal_P_ + 1.0 / kal_R_);
+        kal_x_ += kal_u_;
+        kal_P_ += kal_Q_;
+
+        controller_state_publisher_->msg_.tension_filtered = kal_x_;
 
         controller_state_publisher_->unlockAndPublish();
       }

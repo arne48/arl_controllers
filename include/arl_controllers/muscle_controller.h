@@ -13,8 +13,6 @@
 #include <arl_interfaces/muscle_interface.h>
 #include <arl_hw_msgs/Muscle.h>
 
-#define SAMPLE_SIZE 20
-
 namespace muscle_controllers {
 
   /**
@@ -70,12 +68,16 @@ namespace muscle_controllers {
   private:
     uint8_t control_mode_;
     int loop_count_;
-    double tension_buffer_[SAMPLE_SIZE];
     control_toolbox::Pid pid_controller_;
     boost::scoped_ptr<realtime_tools::RealtimePublisher<arl_hw_msgs::Muscle> > controller_state_publisher_;
     ros::Subscriber sub_act_command_;  /**< Subscription to MuscleCommands by activation */
     ros::Subscriber sub_press_command_;  /**< Subscription to MuscleCommands by pressure */
 
+    double kal_x_;
+    double kal_P_;
+    double kal_R_;
+    double kal_Q_;
+    double kal_u_;
 
     /**
      * Callback for MuscleCommands issued to controlled muscles by activation
