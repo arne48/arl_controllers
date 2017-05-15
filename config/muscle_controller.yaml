@@ -1,128 +1,128 @@
 muscle_1_controller:
   type: muscle_controllers/MuscleController
   name: muscle_1
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_2_controller:
   type: muscle_controllers/MuscleController
   name: muscle_2
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_3_controller:
   type: muscle_controllers/MuscleController
   name: muscle_3
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_4_controller:
   type: muscle_controllers/MuscleController
   name: muscle_4
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_5_controller:
   type: muscle_controllers/MuscleController
   name: muscle_5
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_6_controller:
   type: muscle_controllers/MuscleController
   name: muscle_6
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_7_controller:
   type: muscle_controllers/MuscleController
   name: muscle_7
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_8_controller:
   type: muscle_controllers/MuscleController
   name: muscle_8
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_9_controller:
   type: muscle_controllers/MuscleController
   name: muscle_9
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_10_controller:
   type: muscle_controllers/MuscleController
   name: muscle_10
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_11_controller:
   type: muscle_controllers/MuscleController
   name: muscle_11
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_12_controller:
   type: muscle_controllers/MuscleController
   name: muscle_12
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_13_controller:
   type: muscle_controllers/MuscleController
   name: muscle_13
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_14_controller:
   type: muscle_controllers/MuscleController
   name: muscle_14
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_15_controller:
   type: muscle_controllers/MuscleController
   name: muscle_15
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_16_controller:
   type: muscle_controllers/MuscleController
   name: muscle_16
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_17_controller:
   type: muscle_controllers/MuscleController
   name: muscle_17
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_18_controller:
   type: muscle_controllers/MuscleController
   name: muscle_18
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_19_controller:
   type: muscle_controllers/MuscleController
   name: muscle_19
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_20_controller:
   type: muscle_controllers/MuscleController
   name: muscle_20
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_21_controller:
   type: muscle_controllers/MuscleController
   name: muscle_21
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_22_controller:
   type: muscle_controllers/MuscleController
   name: muscle_22
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_23_controller:
   type: muscle_controllers/MuscleController
   name: muscle_23
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_24_controller:
   type: muscle_controllers/MuscleController
   name: muscle_24
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_25_controller:
   type: muscle_controllers/MuscleController
   name: muscle_25
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_26_controller:
   type: muscle_controllers/MuscleController
   name: muscle_26
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_27_controller:
   type: muscle_controllers/MuscleController
   name: muscle_27
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_28_controller:
   type: muscle_controllers/MuscleController
   name: muscle_28
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_29_controller:
   type: muscle_controllers/MuscleController
   name: muscle_29
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_30_controller:
   type: muscle_controllers/MuscleController
   name: muscle_30
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_31_controller:
   type: muscle_controllers/MuscleController
   name: muscle_31
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
 muscle_32_controller:
   type: muscle_controllers/MuscleController
   name: muscle_32
-  pid: {p: 1250.0,  i: 100.0, d: 0.05, i_clamp_min: -20.0, i_clamp_max: 20.0}
+  pid: {p: 250.0,  i: 20.0, d: 0.01, i_clamp_min: -20.0, i_clamp_max: 20.0}
