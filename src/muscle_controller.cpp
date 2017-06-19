@@ -69,9 +69,8 @@ namespace muscle_controllers {
       muscle_.setActivation(pid_value);
     }
 
-
     // publish state
-    if (loop_count_ % 10 == 0) {
+    if (loop_count_ % 5 == 0) {
       if (controller_state_publisher_ && controller_state_publisher_->trylock()) {
         controller_state_publisher_->msg_.name = muscle_.getName();
         controller_state_publisher_->msg_.current_pressure = muscle_.getCurrentPressure();
