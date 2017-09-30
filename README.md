@@ -45,9 +45,7 @@ Contains the details of the **MuscleController** for the Parameter Server so it 
 Loads the details of the **MuscleController** found in the *muscle_controller.yaml* and calls the spawner of the controller manager afterwards.
 
 ### Topics
-* \[muscle_name\]/state = MuscleState
-* \[muscle_name\]/activation_command = Float64
-* \[muscle_name\]/pressure_command = Float64
+* _/\[muscle_name\]/state_ [arl_hw_msgs::Muscle] 
 
 ## Build Status
 Once tests are added to the project a status indicator will be placed here.

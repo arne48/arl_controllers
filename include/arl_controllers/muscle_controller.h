@@ -54,7 +54,6 @@ namespace muscle_controllers {
     arl_interfaces::MuscleInterface *robot_;  /**< Handle to robot's muscle interface */
 
   private:
-    uint8_t control_mode_;
     int loop_count_;
     control_toolbox::Pid pid_controller_;
     boost::scoped_ptr<realtime_tools::RealtimePublisher<arl_hw_msgs::Muscle> > controller_state_publisher_;

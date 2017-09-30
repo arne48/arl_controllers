@@ -4,7 +4,7 @@
 namespace muscle_controllers {
 
   MuscleController::MuscleController()
-    : loop_count_(0), control_mode_(arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION) {
+    : loop_count_(0) {
     kal_x_ = 40000;
     kal_P_ = 100;
     kal_R_ = 100;
@@ -42,17 +42,8 @@ namespace muscle_controllers {
   void MuscleController::update(const ros::Time &time, const ros::Duration &period) {
     //ROS_DEBUG("Muscle Controller Update");
 
-    control_mode_ = muscle_.getControlMode();
-    double activation = muscle_.getActivation();
-    double desired_pressure = muscle_.getDesiredPressure();
-
-    //If muscle is controlled by activation just this value is set no need to use the pid controller
-    if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_ACTIVATION){
-      muscle_.setActivation(activation);
-      muscle_.setDesiredPressure(desired_pressure);
-
-    } else if(control_mode_ == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE) {
-      muscle_.setDesiredPressure(desired_pressure);      
+    //If muscle is controlled by pressure update the pid controller
+    if (muscle_.getControlMode() == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE) {
       double error = muscle_.getDesiredPressure() - muscle_.getCurrentPressure();
       double pid_value = pid_controller_.computeCommand(error, period);
       // ~ 100 x value range
@@ -68,7 +59,7 @@ namespace muscle_controllers {
         controller_state_publisher_->msg_.desired_pressure = muscle_.getDesiredPressure();
         controller_state_publisher_->msg_.tension = muscle_.getTension();
         controller_state_publisher_->msg_.activation = muscle_.getActivation();
-        controller_state_publisher_->msg_.control_mode = control_mode_;
+        controller_state_publisher_->msg_.control_mode = muscle_.getControlMode();
 
         //kalman filter for volatile tension values
         kal_x_ = (muscle_.getTension() * kal_P_ + kal_x_ * kal_R_) / (kal_P_ + kal_R_);
@@ -83,10 +74,9 @@ namespace muscle_controllers {
         controller_state_publisher_->unlockAndPublish();
       }
     }
+
     loop_count_++;
-
   }
-
 }
 
 PLUGINLIB_EXPORT_CLASS(muscle_controllers::MuscleController, controller_interface::ControllerBase)
