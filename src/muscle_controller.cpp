@@ -46,8 +46,7 @@ namespace muscle_controllers {
     if (muscle_.getControlMode() == arl_hw_msgs::Muscle::CONTROL_MODE_BY_PRESSURE) {
       double error = muscle_.getDesiredPressure() - muscle_.getCurrentPressure();
       double pid_value = pid_controller_.computeCommand(error, period);
-      // ~ 100 x value range
-      pid_value /= 800000;
+      pid_value /= 800;
       muscle_.setActivation(pid_value);
     }
 
